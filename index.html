@@ -247,14 +247,53 @@
             border-top:1px solid var(--line); }
   @media (prefers-reduced-motion:reduce) { * { animation:none!important;
                                                  transition:none!important; } }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* vsec:css:start */
+  h3.vsec { font-family:var(--mono); font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+            color:var(--text-muted); font-weight:600; margin:32px 0 10px;
+            padding-bottom:8px; border-bottom:1px solid var(--line); }
+  h3.vsec:first-of-type { margin-top:18px; }
+
+  /* The replay clips are square where the rendered ones are 16:9, so at the grid's own cell width
+     they stand a third taller and that section dominates the page. Capping their height keeps the
+     rows at the same visual weight, and narrowing the grid pulls the cards in around the clips
+     instead of leaving five islands with gaps between them. The wrapper goes white rather than
+     black because the replay's own background is white. */
+  #matrix-2d .vwrap { background:#fff; display:flex; justify-content:center; }
+  #matrix-2d .vcard video { width:auto; max-width:100%; max-height:280px; }
+  #matrix-2d { max-width:980px; margin:0 auto; gap:12px; }
+
+  /* Three across the page measure leaves each clip about a third of it, which is small for
+     footage whose subject is a robot thirty metres down a path. The row breaks out of the column
+     and takes the window instead, capped so it does not sprawl on a very wide screen. */
+  /* Three across the page's own column. Widening this row past the column was tried and dropped:
+     it made the section sprawl and left every heading below it on a different left edge. */
+  .exp-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+  @media (max-width: 900px) { .exp-grid { grid-template-columns:1fr; } }
+  /* vsec:css:end */
 </style>
 </head>
 <body>
 
 <nav id="jump" aria-label="Sections"><ul>
   <li><a href="#abstract">Abstract</a></li>
+  <li><a href="#experiment">Experiment</a></li>
+  <li><a href="#videos">Evaluate</a></li>
   <li><a href="#results">Results</a></li>
-  <li><a href="#videos">Videos</a></li>
 </ul></nav>
 
 <div class="wrap">
@@ -302,7 +341,187 @@
     <p>The proposed method is compared with state-of-the-art (SOTA) human-following approaches across diverse scenarios with up to 40 pedestrians, demonstrating superior following performance, safety, and robustness. Moreover, real-world experiments further validate the effectiveness and practical applicability of the proposed approach.</p>
   </div>
 </section>
+<!-- vsec:exp:start -->
+<section id="experiment">
+  <h2>Experiment</h2>
+  <div class="vgrid exp-grid">
+      <figure class="vcard">
+        <div class="vwrap"><video src="media/exp__normal_walk.mp4" poster="media/poster/exp__normal_walk.jpg"
+                                  autoplay muted loop playsinline controls
+                                  preload="auto"></video></div>
+        <figcaption><strong>Normal Walking</strong></figcaption>
+      </figure>
+      <figure class="vcard">
+        <div class="vwrap"><video src="media/exp__fast_walk.mp4" poster="media/poster/exp__fast_walk.jpg"
+                                  autoplay muted loop playsinline controls
+                                  preload="auto"></video></div>
+        <figcaption><strong>Fast Walking</strong></figcaption>
+      </figure>
+      <figure class="vcard">
+        <div class="vwrap"><video src="media/exp__running.mp4" poster="media/poster/exp__running.jpg"
+                                  autoplay muted loop playsinline controls
+                                  preload="auto"></video></div>
+        <figcaption><strong>Running</strong></figcaption>
+      </figure>
+  </div>
+</section>
+<!-- vsec:exp:end -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="videos">
+  <h2>Evaluate</h2>
+  <!-- vsec:label:start --><h3 class="vsec">IsaacSim</h3><!-- vsec:label:end -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="picker">
+    <div class="prow"><span class="plabel">Pedestrians</span>
+      <div class="pbtns" id="pick-density"><button data-n="5" aria-pressed="true">5</button><button data-n="10" aria-pressed="false">10</button><button data-n="15" aria-pressed="false">15</button><button data-n="20" aria-pressed="false">20</button><button data-n="30" aria-pressed="false">30</button><button data-n="40" aria-pressed="false">40</button></div></div>
+  </div>
+
+  <div class="vgrid matrix" id="matrix" data-sync>
+      <figure class="vcard own" data-method="policy">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>ST-Graph-GRU (ours)</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="adap_rpf">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>Adap-RPF</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="vu_method">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>Vu&#x27;s Method</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="sdrl">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>SDRL</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="dwa">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>DWA</strong></figcaption>
+      </figure></div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- vsec:2d:start -->
+  <h3 class="vsec">IR-SIM</h3>
+  <div class="picker">
+    <div class="prow"><span class="plabel">Pedestrians</span>
+      <div class="pbtns" id="pick-density-2d"><button data-n="5" aria-pressed="true">5</button><button data-n="10" aria-pressed="false">10</button><button data-n="15" aria-pressed="false">15</button><button data-n="20" aria-pressed="false">20</button><button data-n="25" aria-pressed="false">25</button><button data-n="30" aria-pressed="false">30</button></div></div>
+  </div>
+
+  <div class="vgrid matrix" id="matrix-2d" data-sync>
+      <figure class="vcard own" data-method="policy">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>ST-Graph-GRU (ours)</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="adap_rpf">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>Adap-RPF</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="vu_method">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>Vu&#x27;s Method</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="sdrl">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>SDRL</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="dwa">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>DWA</strong></figcaption>
+      </figure></div>
+  <!-- vsec:2d:end -->
+  <!-- vsec:mj:start -->
+  <h3 class="vsec">MuJoCo</h3>
+  <div class="picker">
+    <div class="prow"><span class="plabel">Pedestrians</span>
+      <div class="pbtns" id="pick-density-mj"><button data-n="5" aria-pressed="true">5</button><button data-n="10" aria-pressed="false">10</button><button data-n="15" aria-pressed="false">15</button><button data-n="20" aria-pressed="false">20</button><button data-n="30" aria-pressed="false">30</button><button data-n="40" aria-pressed="false">40</button></div></div>
+  </div>
+
+  <div class="vgrid matrix" id="matrix-mj" data-sync>
+      <figure class="vcard own" data-method="policy">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>ST-Graph-GRU (ours)</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="adap_rpf">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>Adap-RPF</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="vu_method">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>Vu&#x27;s Method</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="sdrl">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>SDRL</strong></figcaption>
+      </figure>
+      <figure class="vcard" data-method="dwa">
+        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
+        <figcaption><strong>DWA</strong></figcaption>
+      </figure></div>
+  <!-- vsec:mj:end -->
+</section>
 <section id="results">
   <h2>Results</h2>
   <p class="lede">Benchmark evaluated across 1,920 paired episodes per method: 12 crowd formations &times; 8 pedestrian densities (5&ndash;40 pedestrians) &times; 20 trials per configuration.</p>
@@ -389,36 +608,6 @@
       <img src="media/metrics_grid.svg" alt="Performance metrics across increasing crowd densities shown as mean values with 95% confidence intervals" style="width:100%; max-width:1400px; height:auto; display:block; margin:0 auto; border-radius:4px;" loading="lazy">
     </div>
   </figure>
-</section>
-
-<section id="videos">
-  <h2>Videos</h2>
-  <div class="picker">
-    <div class="prow"><span class="plabel">Pedestrians</span>
-      <div class="pbtns" id="pick-density"><button data-n="5" aria-pressed="true">5</button><button data-n="10" aria-pressed="false">10</button><button data-n="15" aria-pressed="false">15</button><button data-n="20" aria-pressed="false">20</button><button data-n="30" aria-pressed="false">30</button><button data-n="40" aria-pressed="false">40</button></div></div>
-  </div>
-
-  <div class="vgrid matrix" id="matrix" data-sync>
-      <figure class="vcard own" data-method="policy">
-        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
-        <figcaption><strong>ST-Graph-GRU (ours)</strong></figcaption>
-      </figure>
-      <figure class="vcard" data-method="adap_rpf">
-        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
-        <figcaption><strong>Adap-RPF</strong></figcaption>
-      </figure>
-      <figure class="vcard" data-method="vu_method">
-        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
-        <figcaption><strong>Vu&#x27;s Method</strong></figcaption>
-      </figure>
-      <figure class="vcard" data-method="sdrl">
-        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
-        <figcaption><strong>SDRL</strong></figcaption>
-      </figure>
-      <figure class="vcard" data-method="dwa">
-        <div class="vwrap"><video muted playsinline preload="metadata" controls></video></div>
-        <figcaption><strong>DWA</strong></figcaption>
-      </figure></div>
 </section>
 
 <footer>
@@ -564,5 +753,178 @@ const COMBOS = ["01_cross_road|10|3d", "03_cluster|15|3d", "06_bottleneck_gate|3
     });
   })();
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- vsec:script:start -->
+<script>
+(function () {
+  const DENS = [5, 10, 15, 20, 25, 30];
+  const EPISODE = {"5": "00_circle_crossing", "10": "02_counter_flow", "15": "04_roundabout", "20": "09_overtaking_flow", "25": "08_static_talking_groups", "30": "11_dispersal_explosion"};
+  const OUT = {"policy__00_circle_crossing__05": {"ok": true}, "adap_rpf__00_circle_crossing__05": {"ok": false}, "vu_method__00_circle_crossing__05": {"ok": true}, "sdrl__00_circle_crossing__05": {"ok": true}, "dwa__00_circle_crossing__05": {"ok": false}, "policy__02_counter_flow__10": {"ok": true}, "adap_rpf__02_counter_flow__10": {"ok": false}, "vu_method__02_counter_flow__10": {"ok": false}, "sdrl__02_counter_flow__10": {"ok": true}, "dwa__02_counter_flow__10": {"ok": false}, "policy__04_roundabout__15": {"ok": true}, "adap_rpf__04_roundabout__15": {"ok": false}, "vu_method__04_roundabout__15": {"ok": false}, "sdrl__04_roundabout__15": {"ok": true}, "dwa__04_roundabout__15": {"ok": false}, "policy__09_overtaking_flow__20": {"ok": true}, "adap_rpf__09_overtaking_flow__20": {"ok": false}, "vu_method__09_overtaking_flow__20": {"ok": false}, "sdrl__09_overtaking_flow__20": {"ok": true}, "dwa__09_overtaking_flow__20": {"ok": false}, "policy__08_static_talking_groups__25": {"ok": true}, "adap_rpf__08_static_talking_groups__25": {"ok": false}, "vu_method__08_static_talking_groups__25": {"ok": false}, "sdrl__08_static_talking_groups__25": {"ok": false}, "dwa__08_static_talking_groups__25": {"ok": false}, "policy__11_dispersal_explosion__30": {"ok": true}, "adap_rpf__11_dispersal_explosion__30": {"ok": false}, "vu_method__11_dispersal_explosion__30": {"ok": false}, "sdrl__11_dispersal_explosion__30": {"ok": false}, "dwa__11_dispersal_explosion__30": {"ok": false}};
+  const VIEW = "2d";
+  const grid = document.getElementById("matrix-2d");
+  if (!grid || !DENS.length) return;
+  const cells = Array.prototype.map.call(grid.querySelectorAll("[data-method]"), function (fig) {
+    return { m: fig.dataset.method, fig: fig, v: fig.querySelector("video") };
+  });
+  let density = DENS[0], restarting = false, visible = false;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function key(m) {
+    return m + "__" + EPISODE[String(density)] + "__" + String(density).padStart(2, "0");
+  }
+
+  function restart() {
+    if (restarting || reduced || !visible) return;
+    restarting = true;
+    cells.forEach(function (c) {
+      try { c.v.currentTime = 0; } catch (e) {}
+      c.v.play().catch(function () {});
+    });
+    setTimeout(function () { restarting = false; }, 400);
+  }
+
+  function armClock() {
+    Promise.all(cells.map(function (c) {
+      if (c.v.readyState >= 1) return Promise.resolve();
+      return new Promise(function (res) {
+        c.v.addEventListener("loadedmetadata", res, { once: true });
+      });
+    })).then(function () {
+      const longest = cells.reduce(function (a, b) {
+        return (b.v.duration || 0) > (a.v.duration || 0) ? b : a;
+      });
+      cells.forEach(function (c) { c.v.onended = null; });
+      longest.v.onended = restart;
+      restart();
+    });
+  }
+
+  function load() {
+    cells.forEach(function (c) {
+      const k = key(c.m) + "__" + VIEW, o = OUT[key(c.m)];
+      c.v.poster = "media/poster/" + k + ".jpg";
+      c.v.src = "media/" + k + ".mp4";
+      c.fig.classList.toggle("failed", !!o && !o.ok);
+      c.v.load();
+    });
+    armClock();
+  }
+
+  document.querySelectorAll("#pick-density-2d button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll("#pick-density-2d button").forEach(function (o) {
+        o.setAttribute("aria-pressed", String(o === b));
+      });
+      density = parseInt(b.dataset.n, 10);
+      load();
+    });
+  });
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        visible = e.isIntersecting;
+        if (visible) { restart(); }
+        else { cells.forEach(function (c) { c.v.pause(); }); }
+      });
+    }, { threshold: 0.25 }).observe(grid);
+  } else { visible = true; }
+
+  load();
+})();
+</script>
+<script>
+(function () {
+  const DENS = [5, 10, 15, 20, 30, 40];
+  const EPISODE = {"5": "05_random_walk", "10": "03_cluster", "15": "02_counter_flow", "20": "04_roundabout", "30": "00_circle_crossing", "40": "11_dispersal_explosion"};
+  const OUT = {"policy__05_random_walk__05": {"ok": true}, "adap_rpf__05_random_walk__05": {"ok": true}, "vu_method__05_random_walk__05": {"ok": true}, "sdrl__05_random_walk__05": {"ok": false}, "dwa__05_random_walk__05": {"ok": true}, "policy__03_cluster__10": {"ok": true}, "adap_rpf__03_cluster__10": {"ok": false}, "vu_method__03_cluster__10": {"ok": true}, "sdrl__03_cluster__10": {"ok": false}, "dwa__03_cluster__10": {"ok": false}, "policy__02_counter_flow__15": {"ok": true}, "adap_rpf__02_counter_flow__15": {"ok": false}, "vu_method__02_counter_flow__15": {"ok": true}, "sdrl__02_counter_flow__15": {"ok": false}, "dwa__02_counter_flow__15": {"ok": true}, "policy__04_roundabout__20": {"ok": true}, "adap_rpf__04_roundabout__20": {"ok": true}, "vu_method__04_roundabout__20": {"ok": true}, "sdrl__04_roundabout__20": {"ok": false}, "dwa__04_roundabout__20": {"ok": false}, "policy__00_circle_crossing__30": {"ok": true}, "adap_rpf__00_circle_crossing__30": {"ok": true}, "vu_method__00_circle_crossing__30": {"ok": false}, "sdrl__00_circle_crossing__30": {"ok": true}, "dwa__00_circle_crossing__30": {"ok": false}, "policy__11_dispersal_explosion__40": {"ok": true}, "adap_rpf__11_dispersal_explosion__40": {"ok": false}, "vu_method__11_dispersal_explosion__40": {"ok": false}, "sdrl__11_dispersal_explosion__40": {"ok": false}, "dwa__11_dispersal_explosion__40": {"ok": false}};
+  const VIEW = "mj";
+  const grid = document.getElementById("matrix-mj");
+  if (!grid || !DENS.length) return;
+  const cells = Array.prototype.map.call(grid.querySelectorAll("[data-method]"), function (fig) {
+    return { m: fig.dataset.method, fig: fig, v: fig.querySelector("video") };
+  });
+  let density = DENS[0], restarting = false, visible = false;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function key(m) {
+    return m + "__" + EPISODE[String(density)] + "__" + String(density).padStart(2, "0");
+  }
+
+  function restart() {
+    if (restarting || reduced || !visible) return;
+    restarting = true;
+    cells.forEach(function (c) {
+      try { c.v.currentTime = 0; } catch (e) {}
+      c.v.play().catch(function () {});
+    });
+    setTimeout(function () { restarting = false; }, 400);
+  }
+
+  function armClock() {
+    Promise.all(cells.map(function (c) {
+      if (c.v.readyState >= 1) return Promise.resolve();
+      return new Promise(function (res) {
+        c.v.addEventListener("loadedmetadata", res, { once: true });
+      });
+    })).then(function () {
+      const longest = cells.reduce(function (a, b) {
+        return (b.v.duration || 0) > (a.v.duration || 0) ? b : a;
+      });
+      cells.forEach(function (c) { c.v.onended = null; });
+      longest.v.onended = restart;
+      restart();
+    });
+  }
+
+  function load() {
+    cells.forEach(function (c) {
+      const k = key(c.m) + "__" + VIEW, o = OUT[key(c.m)];
+      c.v.poster = "media/poster/" + k + ".jpg";
+      c.v.src = "media/" + k + ".mp4";
+      c.fig.classList.toggle("failed", !!o && !o.ok);
+      c.v.load();
+    });
+    armClock();
+  }
+
+  document.querySelectorAll("#pick-density-mj button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll("#pick-density-mj button").forEach(function (o) {
+        o.setAttribute("aria-pressed", String(o === b));
+      });
+      density = parseInt(b.dataset.n, 10);
+      load();
+    });
+  });
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        visible = e.isIntersecting;
+        if (visible) { restart(); }
+        else { cells.forEach(function (c) { c.v.pause(); }); }
+      });
+    }, { threshold: 0.25 }).observe(grid);
+  } else { visible = true; }
+
+  load();
+})();
+</script>
+<!-- vsec:script:end -->
 </body>
 </html>
